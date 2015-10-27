@@ -8,15 +8,16 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
 
-  protected $fields;
+  protected $args;
+  protected $phone;
 
   public function __construct(Request $request){
-    if ($request->input('fields')) {
-      $this->fields = $request->input('fields');
+    if ($request->input('args')) {
+      $this->args = $request->input('args');
     }
 
-    if ($request->input('something')) {
-      $this->something = $request->input('something');
+    if ($request->input('phone')) {
+      $this->phone = $request->input('phone');
     }
   }
 }

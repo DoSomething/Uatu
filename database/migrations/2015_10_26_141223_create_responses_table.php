@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResponseTable extends Migration
+class CreateResponsesTable extends Migration
 {
   /**
    * Run the migrations.
@@ -12,7 +12,7 @@ class CreateResponseTable extends Migration
    */
   public function up()
   {
-    Schema::create('response', function (Blueprint $table) {
+    Schema::create('responses', function (Blueprint $table) {
       $table->increments('id');
       $table->integer('mobile_commons_id');
       $table->timestamps();
@@ -26,6 +26,6 @@ class CreateResponseTable extends Migration
    */
   public function down()
   {
-    Schema::drop('response');
+    Schema::drop('responses');
   }
 }

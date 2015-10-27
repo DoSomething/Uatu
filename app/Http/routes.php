@@ -11,10 +11,9 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-  // return $app->welcome();
-  return "Uatu";
-});
+// $app->get('/', function () use ($app) {
+//   // return $app->welcome();
+//   return "Uatu";
+// });
 
-//@TODO - better route name
-$app->get('foo', 'WordController@index');
+$app->get('message', 'MessageController@index');
