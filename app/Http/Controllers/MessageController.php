@@ -4,9 +4,16 @@
 
   use App\Message;
   use App\Response;
+  use App\Services\MobileCommons;
 
   class MessageController extends Controller
   {
+
+    public function __construct(MobileCommons $mobile_commons)
+    {
+        $this->mobile_commons = $mobile_commons;
+    }
+
     public function index()
     {
       // Get the user message.
@@ -28,6 +35,6 @@
         $match_found = TRUE;
       }
 
-      var_dump($match_found);
+      $this->mobile_commons->sendMessage();
     }
   }
