@@ -127,7 +127,7 @@
     * @return bool
     */
     public static function hasNegativeWords($message) {
-      $negativeFormWords = array('no', 'not', 'don\'t', 'can\'t', 'can not', 'do not', 'won\'t', 'doesn\'t', 'didn\'t');
+      $negativeFormWords = array('no', 'not', 'dont', 'cant', 'can not', 'do not', 'wont', 'doesnt', 'didnt');
 
       foreach ($negativeFormWords as $word) {
         if (stripos($message, $word) !== FALSE) {
@@ -153,5 +153,37 @@
       }
 
       return TRUE;
+    }
+
+    /*
+     * Cleans input, getting rid of special characters and looking out for
+     * common abbreviations that might be used.
+     * Written by the man himself, Jon Uy :)
+     *
+     * @param  string  $message
+     */
+    public static function sanitizeMessage($message) {
+      // Single quote to be removed instead of replacing with whitespace to conserve integrity of word.
+      $message = preg_replace('/\'/', '', $message);
+      // Remove all non alphanumeric characters from the user message.
+      $message = preg_replace('/[^A-Za-z0-9 ]/', ' ', $message);
+      // Matches multi-character whitespace with a single space.
+      $message = preg_replace('/\s+/', ' ', $message);
+      $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+
+      $abbreviations = array(
+        'u' => 'you',
+        'ur' => 'your',
+        'urself' => 'yourself',
+      );
+      $words = explode(' ', $message);
+      for ($i = 0; $i < count($words); $i++) {
+        if(isset($abbreviations[$words[$i]])) {
+          $key = $words[$i];
+          $words[$i] = $abbreviations[$key];
+        }
+      }
+      $message = implode(' ', $words);
+      return $message;
     }
   }

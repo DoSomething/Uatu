@@ -12,6 +12,7 @@
       // Get the user message.
       // @TODO - Do some user message sanitization, make it all lower case, common misspellings, slang.
       $user_message = $this->args;
+      $user_message = Message::sanitizeMessage($user_message);
 
       // Test the message against all of the regex messages.
       if ($matched_response = Message::testPhraseMessages($user_message)) {
