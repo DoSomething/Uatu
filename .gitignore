@@ -3,3 +3,4 @@ composer.lock
 .env
 .DS_Store
 .sass-cache
+/vendor
