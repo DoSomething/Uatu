@@ -6,9 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddBackResponseIdColumn' => $baseDir . '/database/migrations/2015_10_28_220955_add_back_response_id_column.php',
     'CreateMessagesTable' => $baseDir . '/database/migrations/2015_10_26_141301_create_messages_table.php',
     'CreateResponsesTable' => $baseDir . '/database/migrations/2015_10_26_141223_create_responses_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'DeletePositiveNegativeColumns' => $baseDir . '/database/migrations/2015_10_28_225905_delete_positive_negative_columns.php',
+    'DropResponseIdColumn' => $baseDir . '/database/migrations/2015_10_28_220308_drop_response_id_column.php',
     'ExampleTest' => $baseDir . '/tests/ExampleTest.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
@@ -414,7 +417,6 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
-    'RemoveResponseIdColumn' => $baseDir . '/database/migrations/2015_10_28_214358_remove_response_id_column.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -454,4 +456,5 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UpdateResponsIdColumn' => $baseDir . '/database/migrations/2015_10_28_214903_update_respons_id_column.php',
 );
