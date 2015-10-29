@@ -43,6 +43,10 @@ namespace :deploy do
     run "cd #{release_path} && php artisan custom-styles"
   end
 
+  task :artisan_cache_clear do
+    run "cd #{release_path} && php artisan cache:clear"
+  end
+
   task :restart_queue_worker, :on_error => :continue do
     run "ps -ef | grep 'queue:work' | awk '{print $2}' | xargs sudo kill -9"
   end
