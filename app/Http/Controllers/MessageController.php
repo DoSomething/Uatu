@@ -26,7 +26,6 @@
       }
 
       $this->mobile_commons->sendMessage($matched_response, $this->phone);
-      // $this->mobile_commons->getBroadcasts();
     }
 
     public function getFinalOptInPath($matched_response) {

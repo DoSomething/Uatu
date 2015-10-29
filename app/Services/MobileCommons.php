@@ -23,16 +23,19 @@ class MobileCommons
 
   /**
    * Send message to mobile commons
-   *
    */
-  public function sendMessage($message, $phone)
+  public function sendMessage($opt_in_path, $phone)
   {
     $username = env('MOBILE_COMMONS_USERNAME');
     $password = env('MOBILE_COMMONS_PASSWORD');
 
-    $response = $this->client->request('POST', 'send_message',
+    $response = $this->client->request('POST', 'profile_update',
       [
-        'auth' => [$username, $password]
+        'auth'  => [$username, $password],
+        'query' => [
+          'phone_number'   => $phone,
+          'opt_in_path_id' => $opt_in_path,
+        ]
       ]
     );
 
@@ -54,20 +57,4 @@ class MobileCommons
       return TRUE;
     }
   }
-
-  public function getBroadcasts()
-  {
-    $username = env('MOBILE_COMMONS_USERNAME');
-    $password = env('MOBILE_COMMONS_PASSWORD');
-
-    $response = $this->client->request('GET', 'broadcasts',
-      [
-        'auth' => [$username, $password],
-        'query' => ['campaign_id' => '139384'],
-      ]
-    );
-
-    // var_dump($response->getBody()->getContents());
-  }
-
 }
