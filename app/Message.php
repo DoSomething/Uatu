@@ -104,7 +104,6 @@
 
       foreach ($phrase_messages as $phrase) {
         if ((stripos($user_message, $phrase->message) !== FALSE) || (levenshtein($user_message, $phrase->message) <= self::$match_threshold)) {
-          // var_dump($phrase->response_id);
           return (self::checkSentiment($phrase, $user_message)) ? $phrase->response_id : NULL;
         }
       }
@@ -155,6 +154,4 @@
 
       return TRUE;
     }
-
-
   }
