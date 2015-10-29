@@ -55,12 +55,12 @@
       foreach ($regex_messages as $regex)
       {
         if (preg_match($regex->message, $user_message)) {
-          var_dump($regex->id);
-          return TRUE;
+          // @TODO - check sentiment here?
+          return $regex->response_id;
         }
       }
 
-      return FALSE;
+      return NULL;
     }
 
     /*
@@ -84,12 +84,12 @@
         // If we don't need an exact match for the word, check if it exists in the users message at all.
         else {
           if (stripos($user_message, $word->message) !== FALSE) {
-            return (self::checkSentiment($word, $user_message)) ? TRUE : FALSE;
+            return (self::checkSentiment($word, $user_message)) ? $word->response_id : NULL;
           }
         }
       }
 
-      return FALSE;
+      return NULL;
     }
 
     /*
@@ -104,27 +104,21 @@
 
       foreach ($phrase_messages as $phrase) {
         if ((stripos($user_message, $phrase->message) !== FALSE) || (levenshtein($user_message, $phrase->message) <= self::$match_threshold)) {
-          var_dump(self::checkSentiment($phrase, $user_message));
-          return (self::checkSentiment($phrase, $user_message)) ? TRUE : FALSE;
+          // var_dump($phrase->response_id);
+          return (self::checkSentiment($phrase, $user_message)) ? $phrase->response_id : NULL;
         }
       }
 
-      return FALSE;
+      return NULL;
     }
 
-    // @TODO - Remove theses columns from the database and remove this function
-    // we should just have a simple check for sentiment.
-    public static function getMessageSentiment($message) {
-      $sentiment = NULL;
-
-      if ($message->negative_word) {
-        $sentiment = 'negative';
-      }
-      else if ($message->positive_word) {
-        $sentiment = 'positive';
-      }
-
-      return $sentiment;
+    /*
+    * Simply checks if the message has a sentiment tied to it
+    * so we can know if we should check if the sentiment has been
+    * negated by negative words.
+    */
+    public static function hasSentiment($message) {
+      return ($message->has_sentiment) ? TRUE : FALSE;
     }
 
     /*
@@ -155,12 +149,12 @@
     * @return bool
     */
     public static function checkSentiment($message, $user_message) {
-      $sentiment = self::getMessageSentiment($message);
-
-      if ($sentiment && self::hasNegativeWords($user_message)) {
+      if (self::hasSentiment($message) && self::hasNegativeWords($user_message)) {
         return FALSE;
       }
 
       return TRUE;
     }
+
+
   }

@@ -4,16 +4,9 @@
 
   use App\Message;
   use App\Response;
-  use App\Services\MobileCommons;
 
   class MessageController extends Controller
   {
-
-    public function __construct(MobileCommons $mobile_commons)
-    {
-        $this->mobile_commons = $mobile_commons;
-    }
-
     public function index()
     {
       // Get the user message.
@@ -22,16 +15,19 @@
       $match_found = FALSE;
 
       // Test the message against all of the regex messages.
-      if (Message::testPhraseMessages($user_message)) {
+      if ($respons_message = Message::testPhraseMessages($user_message)) {
         var_dump("phrase");
+        var_dump($response_message);
         $match_found = TRUE;
       }
-      else if (Message::testWordMessages($user_message)) {
+      else if ($response_message = Message::testWordMessages($user_message)) {
         var_dump("word");
+        var_dump($response_message);
         $match_found = TRUE;
       }
       else if (Message::testRegexMessages($user_message)) {
         var_dump("regex");
+        var_dump($response_message);
         $match_found = TRUE;
       }
 
