@@ -18,7 +18,7 @@ class MobileCommons
     $company_key = env('MOBILE_COMMONS_COMPANY_KEY');
 
     $this->client = new Client([
-      'base_uri' => $mobile_commons_url,
+      'base_uri' => 'https://secure.mcommons.com/api/',
     ]);
   }
 
