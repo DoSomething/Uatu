@@ -32,7 +32,7 @@ class MobileCommons
 
     $response = $this->client->request('POST', 'profile_update',
       [
-        'auth'  => [$username, $password],
+        'auth'  => ['developers@dosomething.org','80276608'],
         'query' => [
           'phone_number'   => $phone,
           'opt_in_path_id' => $opt_in_path,
@@ -70,7 +70,7 @@ class MobileCommons
 
     $response = $this->client->request('GET', 'campaigns',
       [
-        'auth'  => [$username, $password],
+        'auth'  => ['developers@dosomething.org','80276608'],
         'query' => ['include_opt_in_paths' => 1]
       ]
     );
