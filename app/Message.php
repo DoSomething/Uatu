@@ -83,7 +83,7 @@
         }
         // If we don't need an exact match for the word, check if it exists in the users message at all.
         else {
-          if (stripos($user_message, $word->message) !== FALSE) {
+          if (stripos($user_message, self::sanitizeMessage($word->message)) !== FALSE) {
             return (self::checkSentiment($word, $user_message)) ? $word->response_id : NULL;
           }
         }
@@ -103,7 +103,7 @@
       $phrase_messages = self::getPhraseMessages();
 
       foreach ($phrase_messages as $phrase) {
-        if ((stripos($user_message, $phrase->message) !== FALSE) || (levenshtein($user_message, $phrase->message) <= self::$match_threshold)) {
+        if ((stripos($user_message, self::sanitizeMessage($phrase->message)) !== FALSE) || (levenshtein($user_message, $phrase->message) <= self::$match_threshold)) {
           return (self::checkSentiment($phrase, $user_message)) ? $phrase->response_id : NULL;
         }
       }
