@@ -25,7 +25,7 @@
         $matched_response = self::getFinalOptInPath($matched_response);
       }
 
-      $this->mobile_commons->sendMessage($matched_response, $this->phone);
+      return $this->mobile_commons->sendMessage($matched_response, $this->phone);
     }
 
     public function getFinalOptInPath($matched_response) {

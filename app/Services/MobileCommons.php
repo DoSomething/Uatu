@@ -40,7 +40,12 @@ class MobileCommons
       ]
     );
 
-    return $response;
+    $json_response = array(
+      'success' => self::isSuccessful($response),
+      'opt_in_path' => $opt_in_path,
+    );
+
+    return response()->json($json_response);
   }
 
   /**
