@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 use GuzzleHttp\Client;
+use Illuminate\Http\Response;
 
 class MobileCommons
 {
@@ -56,5 +57,36 @@ class MobileCommons
     else {
       return TRUE;
     }
+  }
+
+  /**
+   * Gets all of the opt in paths
+   * for the pregnancy campaign so we don't have to manually find them all.
+   */
+  public function getCampaignOptInPaths()
+  {
+    $username = env('MOBILE_COMMONS_USERNAME');
+    $password = env('MOBILE_COMMONS_PASSWORD');
+
+    $response = $this->client->request('GET', 'campaigns',
+      [
+        'auth'  => [$username, $password],
+        'query' => ['include_opt_in_paths' => 1]
+      ]
+    );
+
+    $paths = array();
+    $campaigns = $response->getBody()->getContents();
+    $campaigns = simplexml_load_string($campaigns);
+    foreach ($campaigns->campaigns->campaign as $campaign) {
+      if ($campaign['id'] == '139384') {
+        foreach ($campaign->opt_in_paths->opt_in_path as $path) {
+          $id = (string) $path['id'];
+          $paths[$id] = (string) $path->name;
+        }
+      }
+    }
+
+    return $paths;
   }
 }

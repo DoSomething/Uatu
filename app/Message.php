@@ -184,6 +184,6 @@
         }
       }
       $message = implode(' ', $words);
-      return $message;
+      return strtolower($message);
     }
   }
