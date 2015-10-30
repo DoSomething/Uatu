@@ -43,6 +43,7 @@ class MobileCommons
     $json_response = array(
       'success' => self::isSuccessful($response),
       'opt_in_path' => $opt_in_path,
+      'phone' => $phone,
     );
 
     return response()->json($json_response);

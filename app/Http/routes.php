@@ -16,5 +16,5 @@
 //   return "Uatu";
 // });
 
-$app->get('message', 'MessageController@index');
+$app->post('message', 'MessageController@index');
 $app->get('paths', 'MessageController@get_opt_in_paths');
