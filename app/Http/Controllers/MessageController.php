@@ -9,19 +9,21 @@
   {
     public function index()
     {
+      // Get the mdata the users is in.
+      $mdata_id = $this->mdata_id;
+
       // Get the user message.
-      // @TODO - Do some user message sanitization, make it all lower case, common misspellings, slang.
       $user_message = $this->args;
       $user_message = Message::sanitizeMessage($user_message);
 
       // Test the message against all of the regex messages.
-      if ($matched_response = Message::testPhraseMessages($user_message)) {
+      if ($matched_response = Message::testPhraseMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
       }
-      else if ($matched_response = Message::testWordMessages($user_message)) {
+      else if ($matched_response = Message::testWordMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
       }
-      else if ($matched_response = Message::testRegexMessages($user_message)) {
+      else if ($matched_response = Message::testRegexMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
       }
 
@@ -65,7 +67,7 @@
           // var_dump($message);
         }
 
-        $path_ids[$key] = $matched_response;
+        $path_ids[$key] = $message;
       }
 
       return response()->json($path_ids);

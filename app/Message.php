@@ -49,14 +49,14 @@
     * @param  string  $user_message
     * @return bool
     */
-    public static function testRegexMessages($user_message) {
+    public static function testRegexMessages($user_message, $mdata_id) {
       $regex_messages = self::getRegexMessages();
 
       foreach ($regex_messages as $regex)
       {
         if (preg_match($regex->message, $user_message)) {
           // @TODO - check sentiment here?
-          return $regex->response_id;
+          return self::determineOptInPath($regex, $mdata_id);
         }
       }
 
@@ -69,7 +69,7 @@
     * @param  string  $user_message
     * @return bool
     */
-    public static function testWordMessages($user_message)
+    public static function testWordMessages($user_message, $mdata_id)
     {
       $word_messages = self::getWordMessages();
 
@@ -84,7 +84,7 @@
         // If we don't need an exact match for the word, check if it exists in the users message at all.
         else {
           if (stripos($user_message, self::sanitizeMessage($word->message)) !== FALSE) {
-            return (self::checkSentiment($word, $user_message)) ? $word->response_id : NULL;
+            return (self::checkSentiment($word, $user_message)) ? self::determineOptInPath($word, $mdata_id) : NULL;
           }
         }
       }
@@ -98,17 +98,31 @@
     * @param  string  $user_message
     * @return bool
     */
-    public static function testPhraseMessages($user_message)
+    public static function testPhraseMessages($user_message, $mdata_id)
     {
       $phrase_messages = self::getPhraseMessages();
 
       foreach ($phrase_messages as $phrase) {
-        if ((stripos($user_message, self::sanitizeMessage($phrase->message)) !== FALSE) || (levenshtein($user_message, $phrase->message) <= self::$match_threshold)) {
-          return (self::checkSentiment($phrase, $user_message)) ? $phrase->response_id : NULL;
+        if ((strcmp($user_message, self::sanitizeMessage($phrase->message)) == 0) || (stripos($user_message, self::sanitizeMessage($phrase->message)) !== FALSE) || (levenshtein($user_message, $phrase->message) <= self::$match_threshold)) {
+          return (self::checkSentiment($phrase, $user_message)) ? self::determineOptInPath($phrase, $mdata_id) : NULL;
         }
       }
 
       return NULL;
+    }
+
+    /*
+     * There are two different campagins and different mdatas' and opt-in-paths
+     * for each, so we need to figure out which on the users is sending from
+     * to figure out which opt in path to choose.
+     */
+    public static function determineOptInPath($message, $mdata_id) {
+      if ($mdata_id == '12368') {
+        return $message->short_term;
+      }
+      elseif ($mdata_id == '12388') {
+        return $message->long_term;
+      }
     }
 
     /*

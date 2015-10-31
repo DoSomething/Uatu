@@ -11,6 +11,7 @@ class Controller extends BaseController
 
   protected $args;
   protected $phone;
+  protected $mdata_id;
 
   public function __construct(Request $request, MobileCommons $mobile_commons)
   {
@@ -22,6 +23,10 @@ class Controller extends BaseController
 
     if ($request->input('phone')) {
       $this->phone = $request->input('phone');
+    }
+
+    if ($request->input('mdata_id')) {
+      $this->mdata_id = $request->input('mdata_id');
     }
   }
 }
