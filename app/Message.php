@@ -78,7 +78,7 @@
         if ($word->exact) {
           // Check if the work meets our levenshtein threshold
           if (levenshtein($user_message, $word->message) <= self::$match_threshold) {
-            return TRUE;
+            return (self::checkSentiment($word, $user_message)) ? self::determineOptInPath($word, $mdata_id) : NULL;
           }
         }
         // If we don't need an exact match for the word, check if it exists in the users message at all.
