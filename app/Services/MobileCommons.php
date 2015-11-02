@@ -18,7 +18,7 @@ class MobileCommons
     $company_key = env('MOBILE_COMMONS_COMPANY_KEY');
 
     $this->client = new Client([
-      'base_uri' => 'https://secure.mcommons.com/api/',
+      'base_uri' => $mobile_commons_url,
     ]);
   }
 
@@ -32,7 +32,7 @@ class MobileCommons
 
     $response = $this->client->request('POST', 'profile_update',
       [
-        'auth'  => ['developers@dosomething.org','80276608'],
+        'auth'  => [$username, $password],
         'query' => [
           'phone_number'   => $phone,
           'opt_in_path_id' => $opt_in_path,
