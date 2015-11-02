@@ -60,24 +60,10 @@
     * @return JSON
     */
     public function get_opt_in_paths() {
-      $paths = $this->mobile_commons->getCampaignOptInPaths();
+      $paths = $this->mobile_commons->getCampaignOptInPaths($this->campaign_id);
       $path_ids = array();
       foreach ($paths as $key => $message) {
         $message = strtolower($message);
-        if ($matched_response = Message::testPhraseMessages($message)) {
-          $matched_response = self::getFinalOptInPath($matched_response);
-        }
-        else if ($matched_response = Message::testWordMessages($message)) {
-          $matched_response = self::getFinalOptInPath($matched_response);
-        }
-        else if ($matched_response = Message::testRegexMessages($message)) {
-          $matched_response = self::getFinalOptInPath($matched_response);
-        }
-        else {
-          // catch non-matched values
-          // var_dump($message);
-        }
-
         $path_ids[$key] = $message;
       }
 

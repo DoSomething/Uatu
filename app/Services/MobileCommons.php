@@ -69,14 +69,14 @@ class MobileCommons
    * Gets all of the opt in paths
    * for the pregnancy campaign so we don't have to manually find them all.
    */
-  public function getCampaignOptInPaths()
+  public function getCampaignOptInPaths($campaign_id)
   {
     $username = env('MOBILE_COMMONS_USERNAME');
     $password = env('MOBILE_COMMONS_PASSWORD');
 
     $response = $this->client->request('GET', 'campaigns',
       [
-        'auth'  => ['developers@dosomething.org','80276608'],
+        'auth'  => [$username, $password],
         'query' => ['include_opt_in_paths' => 1]
       ]
     );
@@ -85,7 +85,7 @@ class MobileCommons
     $campaigns = $response->getBody()->getContents();
     $campaigns = simplexml_load_string($campaigns);
     foreach ($campaigns->campaigns->campaign as $campaign) {
-      if ($campaign['id'] == '139544') { //139384
+      if ($campaign['id'] == $campaign_id) {
         foreach ($campaign->opt_in_paths->opt_in_path as $path) {
           $id = (string) $path['id'];
           $paths[$id] = (string) $path->name;
