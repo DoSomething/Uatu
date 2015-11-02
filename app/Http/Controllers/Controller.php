@@ -12,6 +12,7 @@ class Controller extends BaseController
   protected $args;
   protected $phone;
   protected $mdata_id;
+  protected $is_mms_msg;
 
   public function __construct(Request $request, MobileCommons $mobile_commons)
   {
@@ -27,6 +28,10 @@ class Controller extends BaseController
 
     if ($request->input('mdata_id')) {
       $this->mdata_id = $request->input('mdata_id');
+    }
+
+    if ($request->input('mms_image_url')) {
+      $this->is_mms_msg = TRUE;
     }
   }
 }

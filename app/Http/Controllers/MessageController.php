@@ -12,6 +12,17 @@
       // Get the mdata the users is in.
       $mdata_id = $this->mdata_id;
 
+      if ($this->is_mms_msg) {
+        if ($mdata_id == '12368') {
+          $matched_response = '195188';
+        }
+        elseif ($mdata_id == '12388') {
+          $matched_response = '195456';
+        }
+
+        return $this->mobile_commons->sendMessage($matched_response, $this->phone);
+      }
+
       // Get the user message.
       $user_message = $this->args;
       $user_message = Message::sanitizeMessage($user_message);
