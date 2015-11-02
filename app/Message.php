@@ -118,10 +118,20 @@
      */
     public static function determineOptInPath($message, $mdata_id) {
       if ($mdata_id == '12368') {
-        return $message->short_term;
+        if ($message == 'default') {
+          return '196048';
+        }
+        else {
+          return $message->long_term;
+        }
       }
       elseif ($mdata_id == '12388') {
-        return $message->long_term;
+        if ($message == 'default') {
+          return '195376';
+        }
+        else {
+          return $message->long_term;
+        }
       }
     }
 

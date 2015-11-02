@@ -27,15 +27,21 @@
       $user_message = $this->args;
       $user_message = Message::sanitizeMessage($user_message);
 
-      // Test the message against all of the regex messages.
+      // Test Regex messages.
       if ($matched_response = Message::testPhraseMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
       }
+      // Test word messages.
       else if ($matched_response = Message::testWordMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
       }
+      // Test phrase messages.
       else if ($matched_response = Message::testRegexMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
+      }
+      // No match found message.
+      else {
+        $matched_response = Message::determineOptInPath('default', $mdata_id);
       }
 
       return $this->mobile_commons->sendMessage($matched_response, $this->phone);
