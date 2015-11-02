@@ -50,7 +50,7 @@ class MobileCommons
   }
 
   /**
-   * get the 'success' attribute from the xml repsonse.
+   * Get the 'success' attribute from the xml repsonse.
    */
   public function isSuccessful($response)
   {

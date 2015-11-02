@@ -11,10 +11,21 @@
 |
 */
 
-// $app->get('/', function () use ($app) {
-//   // return $app->welcome();
-//   return "Uatu";
-// });
-
+/*
+ * Main API route that user messages get posted to
+ * and then processed for matching.
+ *
+ * Expects params:
+ * args - the user's message.
+ * phone - the user's phone number.
+ * mdata_id - the mData the user is opted in to.
+ */
 $app->post('usermessage', 'MessageController@index');
-$app->get('paths', 'MessageController@get_opt_in_paths');
+
+/*
+ * Just a helper route that lists all the campaign opt in paths.
+ *
+ * Expects params:
+ * campaign_id - the campaign to get opt-in paths for
+ */
+$app->get('paths', 'MessageController@getPaths');

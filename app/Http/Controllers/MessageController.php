@@ -27,7 +27,7 @@
       $user_message = $this->args;
       $user_message = Message::sanitizeMessage($user_message);
 
-      // Test Regex messages.
+      // Test phrase messages.
       if ($matched_response = Message::testPhraseMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
       }
@@ -35,7 +35,7 @@
       else if ($matched_response = Message::testWordMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
       }
-      // Test phrase messages.
+      // Test regex messages.
       else if ($matched_response = Message::testRegexMessages($user_message, $mdata_id)) {
         $matched_response = self::getFinalOptInPath($matched_response);
       }
@@ -47,6 +47,12 @@
       return $this->mobile_commons->sendMessage($matched_response, $this->phone);
     }
 
+    /*
+     * If there are multiple response options, this function will
+     * select a random one to use.
+     *
+     * @param string $matched_response - A string of opt-in path IDs.
+     */
     public function getFinalOptInPath($matched_response) {
       $options = explode(',', $matched_response);
       $count = count($options);
@@ -65,7 +71,7 @@
     *
     * @return JSON
     */
-    public function get_opt_in_paths() {
+    public function getPaths() {
       $paths = $this->mobile_commons->getCampaignOptInPaths($this->campaign_id);
       $path_ids = array();
       foreach ($paths as $key => $message) {
