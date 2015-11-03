@@ -25,17 +25,6 @@ $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
-| Facade support
-|--------------------------------------------------------------------------
-|
-| Load support for specific facades.
-|
-*/
-
-class_alias('Illuminate\Support\Facades\URL', 'URL');
-
-/*
-|--------------------------------------------------------------------------
 | Register Container Bindings
 |--------------------------------------------------------------------------
 |
@@ -88,9 +77,22 @@ $app->singleton(
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
+$app->register('Collective\Html\HtmlServiceProvider');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+/*
+|--------------------------------------------------------------------------
+| Facade support
+|--------------------------------------------------------------------------
+|
+| Load support for specific facades.
+|
+*/
+
+class_alias('Illuminate\Support\Facades\URL', 'URL');
+class_alias('Collective\Html\HtmlFacade', 'Html');
+class_alias('Collective\Html\FormFacade', 'Form');
 
 /*
 |--------------------------------------------------------------------------

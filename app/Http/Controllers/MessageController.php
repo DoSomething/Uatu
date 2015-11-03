@@ -25,7 +25,7 @@
      */
     public function create()
     {
-      //
+      return View::make('messages.create');
     }
 
     /**
