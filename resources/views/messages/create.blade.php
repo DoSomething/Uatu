@@ -20,7 +20,15 @@
 <h1>Create a Message</h1>
 
 <!-- if there are creation errors, they will show here -->
-{{{ isset($errors) ? HTML::ul($errors->all())  : NULL }}}
+@if (count($errors) > 0)
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
 
 {!! Form::open(array('url' => 'messages')) !!}
 
@@ -46,12 +54,12 @@
 
   <div class="form-group">
     {!! Form::label('exact', 'Needs to be exact') !!}
-    {!! Form::checkbox('exact', NULL, array('class' => 'form-control')) !!}
+    {!! Form::checkbox('exact', true, array('class' => 'form-control')) !!}
   </div>
 
   <div class="form-group">
     {!! Form::label('has_sentiment', 'Message has sentiment') !!}
-    {!! Form::checkbox('has_sentiment', NULL, array('class' => 'form-control')) !!}
+    {!! Form::checkbox('has_sentiment', true, array('class' => 'form-control')) !!}
   </div>
 
   {!! Form::submit('Create the Message!', array('class' => 'btn btn-primary')) !!}

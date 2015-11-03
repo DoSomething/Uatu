@@ -1,6 +1,8 @@
 <?php
 
   namespace App\Http\Controllers;
+  use Validator;
+  use Illuminate\Http\Request;
   use Illuminate\Support\Facades\View;
   use App\Message;
 
@@ -33,9 +35,38 @@
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-      //
+      $rules = array(
+        'type'          => 'required',
+        'message'       => 'required',
+        'short_term'    => 'required',
+        'long_term'     => 'required',
+      );
+
+      $validator = Validator::make($request->all(), $rules);
+
+      // process the form.
+      if ($validator->fails()) {
+        return redirect('messages/create')
+          ->withErrors($validator)
+          ->withInput();
+      }
+      else {
+        // store
+        $message = new Message;
+        $message->type          = $request->input('type');
+        $message->message       = $request->input('message');
+        $message->exact         = $request->input('exact');
+        $message->short_term    = $request->input('short_term');
+        $message->long_term     = $request->input('long_term');
+        $message->has_sentiment = $request->input('has_sentiment');
+        $message->save();
+
+        // redirect
+        $request->session()->flash('status', 'Successfully created message!');
+        return redirect('messages');
+      }
     }
 
     /**
