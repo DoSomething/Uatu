@@ -64,7 +64,7 @@
         $message->save();
 
         // redirect
-        $request->session()->flash('status', 'Successfully created message!');
+        $request->session()->flash('message', 'Successfully created message!');
         return redirect('messages');
       }
     }
@@ -131,7 +131,7 @@
         $message->save();
 
         // redirect
-        $request->session()->flash('status', 'Message updated!');
+        $request->session()->flash('message', 'Message updated!');
         return redirect('messages');
       }
     }
@@ -142,8 +142,14 @@
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-      //
+      // delete
+      $message = Message::find($id);
+      $message->delete();
+
+      // redirect
+      $request->session()->flash('message', 'Delete succesful!');
+      return redirect('messages');
     }
   }
