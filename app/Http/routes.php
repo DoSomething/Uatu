@@ -45,7 +45,7 @@ $app->post('messages', [
 $app->get('messages/{id}/edit', [
   'as' => 'messages.edit', 'uses' => 'MessageController@edit'
 ]);
-$app->patch('messages/{id}', [
+$app->post('messages/{id}', [
   'as' => 'messages.update', 'uses' => 'MessageController@update'
 ]);
 $app->get('messages/{id}/delete', [

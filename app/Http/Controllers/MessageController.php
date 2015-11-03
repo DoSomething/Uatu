@@ -90,7 +90,9 @@
      */
     public function edit($id)
     {
-      //
+      $message = Message::find($id);
+
+      return View::make('messages.edit')->with('message', $message);
     }
 
     /**
@@ -99,9 +101,39 @@
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-      //
+      $rules = array(
+        'type'          => 'required',
+        'message'       => 'required',
+        'short_term'    => 'required',
+        'long_term'     => 'required',
+      );
+
+      $validator = Validator::make($request->all(), $rules);
+
+      // process the form.
+      if ($validator->fails()) {
+        return redirect('messages/' . $id . '/edit')
+          ->withErrors($validator)
+          ->withInput();
+      }
+      else {
+        // store
+        $message = Message::find($id);
+        // dd($message);
+        $message->type          = $request->input('type');
+        $message->message       = $request->input('message');
+        $message->exact         = $request->input('exact');
+        $message->short_term    = $request->input('short_term');
+        $message->long_term     = $request->input('long_term');
+        $message->has_sentiment = $request->input('has_sentiment');
+        $message->save();
+
+        // redirect
+        $request->session()->flash('status', 'Message updated!');
+        return redirect('messages');
+      }
     }
 
     /**
