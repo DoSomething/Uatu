@@ -1,7 +1,7 @@
 <?php
 
   namespace App\Http\Controllers;
-
+  use Illuminate\Support\Facades\View;
   use App\Message;
 
   class MessageController extends Controller
@@ -13,7 +13,9 @@
      */
     public function index()
     {
-        //
+      $messages = Message::all();
+
+      return View::make('messages.index')->with('messages', $messages);
     }
 
     /**
@@ -23,7 +25,7 @@
      */
     public function create()
     {
-        //
+      //
     }
 
     /**
@@ -33,7 +35,7 @@
      */
     public function store()
     {
-        //
+      //
     }
 
     /**
@@ -44,7 +46,7 @@
      */
     public function show($id)
     {
-        //
+      //
     }
 
     /**
@@ -55,7 +57,7 @@
      */
     public function edit($id)
     {
-        //
+      //
     }
 
     /**
@@ -66,7 +68,7 @@
      */
     public function update($id)
     {
-        //
+      //
     }
 
     /**
@@ -77,7 +79,6 @@
      */
     public function destroy($id)
     {
-        //
+      //
     }
-
   }
