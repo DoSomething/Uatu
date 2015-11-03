@@ -77,7 +77,9 @@
      */
     public function show($id)
     {
-      //
+      $message = Message::find($id);
+
+      return View::make('messages.show')->with('message', $message);
     }
 
     /**
