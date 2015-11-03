@@ -29,3 +29,14 @@ $app->post('usermessage', 'MobileCommonsController@sendResponse');
  * campaign_id - the campaign to get opt-in paths for
  */
 $app->get('paths', 'MobileCommonsController@getPaths');
+
+/*
+ * CRUD routes
+ */
+$app->get('messages', 'MessageController@index');
+$app->get('messages/create', 'MessageController@create');
+$app->post('messages', 'MessageController@store');
+$app->get('messages/{id}', 'MessageController@show');
+$app->get('messages/{id}/edit', 'MessageController@edit');
+$app->post('messages/{id}', 'MessageController@update');
+$app->delete('messages/{id}', 'MessageController@destroy');
