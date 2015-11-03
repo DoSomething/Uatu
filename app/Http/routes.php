@@ -33,10 +33,27 @@ $app->get('paths', 'MobileCommonsController@getPaths');
 /*
  * CRUD routes
  */
-$app->get('messages', 'MessageController@index');
-$app->get('messages/create', 'MessageController@create');
-$app->post('messages', 'MessageController@store');
-$app->get('messages/{id}', 'MessageController@show');
-$app->get('messages/{id}/edit', 'MessageController@edit');
-$app->post('messages/{id}', 'MessageController@update');
-$app->delete('messages/{id}', 'MessageController@destroy');
+$app->get('messages', [
+  'as' => 'messages.index', 'uses' => 'MessageController@index'
+]);
+$app->get('messages/create', [
+  'as' => 'messages.create', 'uses' => 'MessageController@create'
+]);
+$app->post('messages', [
+  'as' => 'messages.store', 'uses' => 'MessageController@store'
+]);
+$app->get('messages/{id}/edit', [
+  'as' => 'messages.edit', 'uses' => 'MessageController@edit'
+]);
+$app->patch('messages/{id}', [
+  'as' => 'messages.update', 'uses' => 'MessageController@update'
+]);
+$app->get('messages/{id}/delete', [
+  'as' => 'messages.delete', 'uses' => 'MessageController@delete'
+]);
+$app->delete('messages/{id}', [
+  'as' => 'messages.destroy', 'uses' => 'MessageController@destroy'
+]);
+$app->get('messages/{id}', [
+  'as' => 'messages.show', 'uses' => 'MessageController@show'
+]);
