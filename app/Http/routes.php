@@ -20,7 +20,7 @@
  * phone - the user's phone number.
  * mdata_id - the mData the user is opted in to.
  */
-$app->post('usermessage', 'MessageController@index');
+$app->post('usermessage', 'MobileCommonsController@sendResponse');
 
 /*
  * Just a helper route that lists all the campaign opt in paths.
@@ -28,4 +28,4 @@ $app->post('usermessage', 'MessageController@index');
  * Expects params:
  * campaign_id - the campaign to get opt-in paths for
  */
-$app->get('paths', 'MessageController@getPaths');
+$app->get('paths', 'MobileCommonsController@getPaths');
