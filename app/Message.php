@@ -8,9 +8,9 @@
       'type',
       'message',
       'exact',
-      'negative_word',
-      'positive_word',
-      'response_id',
+      'short_term',
+      'long_term',
+      'has_sentiment',
     ];
 
     // Max threshold for levenshtein formula matches

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropResponseIdColumn extends Migration
+class DropResponsesTable extends Migration
 {
   /**
    * Run the migrations.
@@ -12,9 +12,7 @@ class DropResponseIdColumn extends Migration
    */
   public function up()
   {
-    Schema::table('messages', function (Blueprint $table) {
-      $table->dropColumn('response_id');
-    });
+    Schema::drop('responses');
   }
 
   /**
@@ -24,8 +22,10 @@ class DropResponseIdColumn extends Migration
    */
   public function down()
   {
-    Schema::table('messages', function (Blueprint $table) {
-      //
+    Schema::create('responses', function (Blueprint $table) {
+      $table->increments('id');
+      $table->integer('mobile_commons_id');
+      $table->timestamps();
     });
   }
 }

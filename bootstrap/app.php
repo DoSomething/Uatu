@@ -55,13 +55,13 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//     // Illuminate\Cookie\Middleware\EncryptCookies::class,
-//     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-//     // Illuminate\Session\Middleware\StartSession::class,
-//     // Illuminate\View\Middleware\ShareErrorsFromSession::class,
-//     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
-// ]);
+$app->middleware([
+    Illuminate\Cookie\Middleware\EncryptCookies::class,
+    Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    Illuminate\Session\Middleware\StartSession::class,
+    Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
+]);
 
 // $app->routeMiddleware([
 
@@ -77,9 +77,22 @@ $app->singleton(
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
+$app->register('Collective\Html\HtmlServiceProvider');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+/*
+|--------------------------------------------------------------------------
+| Facade support
+|--------------------------------------------------------------------------
+|
+| Load support for specific facades.
+|
+*/
+
+class_alias('Illuminate\Support\Facades\URL', 'URL');
+class_alias('Collective\Html\HtmlFacade', 'Html');
+class_alias('Collective\Html\FormFacade', 'Form');
 
 /*
 |--------------------------------------------------------------------------
