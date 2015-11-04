@@ -3,7 +3,7 @@
 @section('title', 'Messages')
 
 @section('content')
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
         <td>ID</td>
@@ -26,19 +26,27 @@
         <td>{{ $value->long_term }}</td>
         <td>{{ $value->has_sentiment }}</td>
 
-        <!-- we will also add show, edit, and delete buttons -->
         <td>
-          <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
-          {!! Form::open(array('url' => 'messages/' . $value->id, 'class' => 'pull-right')) !!}
-            {!! Form::hidden('_method', 'DELETE') !!}
-            {!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}
-          {!! Form::close() !!}
-
-          <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-          <a class="btn btn-small btn-success" href="{{ URL::to('messages/' . $value->id) }}">Show</a>
-
-          <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-          <a class="btn btn-small btn-info" href="{{ URL::to('messages/' . $value->id . '/edit') }}">Edit</a>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{ URL::to('messages/' . $value->id) }}">Show</a>
+              </li>
+              <li>
+                <a href="{{ URL::to('messages/' . $value->id . '/edit') }}">Edit</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                {!! Form::open(array('url' => 'messages/' . $value->id)) !!}
+                  {!! Form::hidden('_method', 'DELETE') !!}
+                  {!! Form::submit('Delete', array('class' => 'btn btn-danger center-block')) !!}
+                {!! Form::close() !!}
+              </li>
+            </ul>
+          </div>
         </td>
       </tr>
     @endforeach
