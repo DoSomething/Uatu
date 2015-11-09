@@ -14,9 +14,6 @@ class DatabaseSeeder extends Seeder
   {
     Model::unguard();
 
-    $this->call('WordsSeeder');
-    $this->command->info('Words table seeded!');
-
     Model::reguard();
   }
 }

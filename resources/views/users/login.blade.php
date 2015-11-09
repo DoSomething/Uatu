@@ -6,7 +6,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   <style>
-    body { padding-top: 70px; }
+    body {
+      padding-top: 70px;
+    }
+    .form-signin {
+      max-width: 330px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    .form-signin .form-signin-heading {
+      margin-bottom: 10px;
+    }
+    .form-signin .form-control {
+      position: relative;
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -17,18 +33,8 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="{{ URL::to('messages') }}">Uatu</a>
       </div>
-      <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('messages') }}">View All Messages</a></li>
-        <li><a href="{{ URL::to('messages/create') }}">Create a Message</a></li>
-      </ul>
-      {!! Form::open(array('url' => 'logout/', 'class' => 'navbar-form navbar-right')) !!}
-        {!! Form::submit('Logout', array('class' => 'btn btn-danger center-block')) !!}
-      {!! Form::close() !!}
     </div>
   </nav>
-
-  <h1>@yield('title')</h1>
-
   <!-- will be used to show any messages -->
   @if (Session::has('message'))
     <div class="alert alert-info">{{ Session::get('message') }}</div>
@@ -36,6 +42,21 @@
 
   @yield('content')
 
+  {!! Form::open(array('url' => 'login', 'class' => 'form-signin')) !!}
+    <h1>Login</h1>
+
+    <div class="form-group">
+      {!! Form::label('email', 'Email Address', array('class' => 'sr-only')) !!}
+      {!! Form::text('email', NULL, array('placeholder' => 'Email', 'class' => 'form-control')) !!}
+    </div>
+
+    <div class="form-group">
+      {!! Form::label('password', 'Password', array('class' => 'sr-only')) !!}
+      {!! Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password')) !!}
+    </div>
+
+    <p>{!! Form::submit('Log In', array('class' => 'btn btn-primary')) !!}</p>
+  {!! Form::close() !!}
 </div>
 </body>
 </html>
