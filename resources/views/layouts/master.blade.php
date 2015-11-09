@@ -16,6 +16,11 @@
     <ul class="nav navbar-nav">
       <li><a href="{{ URL::to('messages') }}">View All Messages</a></li>
       <li><a href="{{ URL::to('messages/create') }}">Create a Message</a>
+      <li>
+        {!! Form::open(array('url' => 'logout/')) !!}
+          {!! Form::submit('Logout', array('class' => 'btn btn-danger center-block')) !!}
+        {!! Form::close() !!}
+      </li>
     </ul>
   </nav>
 

@@ -34,26 +34,33 @@ $app->get('paths', 'MobileCommonsController@getPaths');
  * CRUD routes
  */
 $app->get('messages', [
-  'as' => 'messages.index', 'uses' => 'MessageController@index'
+  'middleware' => 'auth', 'as' => 'messages.index', 'uses' => 'MessageController@index'
 ]);
 $app->get('messages/create', [
-  'as' => 'messages.create', 'uses' => 'MessageController@create'
+  'middleware' => 'auth', 'as' => 'messages.create', 'uses' => 'MessageController@create'
 ]);
 $app->post('messages', [
-  'as' => 'messages.store', 'uses' => 'MessageController@store'
+  'middleware' => 'auth', 'as' => 'messages.store', 'uses' => 'MessageController@store'
 ]);
 $app->get('messages/{id}/edit', [
-  'as' => 'messages.edit', 'uses' => 'MessageController@edit'
+  'middleware' => 'auth', 'as' => 'messages.edit', 'uses' => 'MessageController@edit'
 ]);
 $app->post('messages/{id}', [
-  'as' => 'messages.update', 'uses' => 'MessageController@update'
+  'middleware' => 'auth', 'as' => 'messages.update', 'uses' => 'MessageController@update'
 ]);
 $app->get('messages/{id}/delete', [
-  'as' => 'messages.delete', 'uses' => 'MessageController@delete'
+  'middleware' => 'auth', 'as' => 'messages.delete', 'uses' => 'MessageController@delete'
 ]);
 $app->delete('messages/{id}', [
-  'as' => 'messages.destroy', 'uses' => 'MessageController@destroy'
+  'middleware' => 'auth', 'as' => 'messages.destroy', 'uses' => 'MessageController@destroy'
 ]);
 $app->get('messages/{id}', [
-  'as' => 'messages.show', 'uses' => 'MessageController@show'
+  'middleware' => 'auth', 'as' => 'messages.show', 'uses' => 'MessageController@show'
 ]);
+
+/*
+ * User routes
+ */
+$app->get('login', 'UserController@show');
+$app->post('login', 'UserController@login');
+$app->post('logout', 'UserController@logout');
