@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   <style>
+    body {
+      padding-top: 70px;
+    }
     .form-signin {
       max-width: 330px;
       padding: 15px;
@@ -25,9 +28,11 @@
 <body>
 <div class="container">
 
-  <nav class="navbar navbar-inverse">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{{ URL::to('messages') }}">Uatu</a>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ URL::to('messages') }}">Uatu</a>
+      </div>
     </div>
   </nav>
   <!-- will be used to show any messages -->

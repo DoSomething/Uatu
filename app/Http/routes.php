@@ -61,6 +61,9 @@ $app->get('messages/{id}', [
 /*
  * User routes
  */
-$app->get('login', 'UserController@show');
+$app->get('login', [
+  'middleware' => 'auth', 'uses' => 'UserController@show'
+]);
+// $app->get('login', 'UserController@show');
 $app->post('login', 'UserController@login');
 $app->post('logout', 'UserController@logout');
