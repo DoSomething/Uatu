@@ -43,12 +43,7 @@
         $matched_response = Message::determineOptInPath('default', $mdata_id);
       }
 
-      // @TODO - move to own function?
-      if ($this->is_test) {
-        return response()->json(array('success' => 'success'));
-      }
-
-      return $this->mobile_commons->sendMessage($matched_response, $this->phone);
+      return $this->mobile_commons->sendMessage($matched_response, $this->phone, $this->is_test);
     }
 
     /*
