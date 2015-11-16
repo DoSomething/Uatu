@@ -43,7 +43,7 @@
         $matched_response = Message::determineOptInPath('default', $mdata_id);
       }
 
-      return $this->mobile_commons->sendMessage($matched_response, $this->phone);
+      return $this->mobile_commons->sendMessage($matched_response, $this->phone, $this->is_test);
     }
 
     /*

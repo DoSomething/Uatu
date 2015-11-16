@@ -14,6 +14,7 @@ class Controller extends BaseController
   protected $mdata_id;
   protected $is_mms_msg;
   protected $campaign_id;
+  protected $is_test;
 
   public function __construct(Request $request, MobileCommons $mobile_commons)
   {
@@ -37,6 +38,10 @@ class Controller extends BaseController
 
     if ($request->input('campaign_id')) {
       $this->campaign_id = $request->input('campaign_id');
+    }
+
+    if ($request->input('is_test')) {
+      $this->is_test = $request->input('is_test');
     }
   }
 }

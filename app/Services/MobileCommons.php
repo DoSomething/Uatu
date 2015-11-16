@@ -25,23 +25,25 @@ class MobileCommons
   /**
    * Send message to mobile commons
    */
-  public function sendMessage($opt_in_path, $phone)
+  public function sendMessage($opt_in_path, $phone, $test = FALSE)
   {
-    $username = env('MOBILE_COMMONS_USERNAME');
-    $password = env('MOBILE_COMMONS_PASSWORD');
+    if (!$test) {
+      $username = env('MOBILE_COMMONS_USERNAME');
+      $password = env('MOBILE_COMMONS_PASSWORD');
 
-    $response = $this->client->request('POST', 'profile_update',
-      [
-        'auth'  => [$username, $password],
-        'query' => [
-          'phone_number'   => $phone,
-          'opt_in_path_id' => $opt_in_path,
+      $response = $this->client->request('POST', 'profile_update',
+        [
+          'auth'  => [$username, $password],
+          'query' => [
+            'phone_number'   => $phone,
+            'opt_in_path_id' => $opt_in_path,
+          ]
         ]
-      ]
-    );
+      );
+    }
 
     $json_response = array(
-      'success' => self::isSuccessful($response),
+      'success' => (isset($response)) ? self::isSuccessful($response) : 'success',
       'opt_in_path' => $opt_in_path,
       'phone' => $phone,
     );
