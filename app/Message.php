@@ -122,7 +122,7 @@
           return '196048';
         }
         else {
-          return $message->long_term;
+          return $message->short_term;
         }
       }
       elseif ($mdata_id == '12388') {
