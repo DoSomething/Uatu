@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/lumen-framework": "5.1.*",
         "vlucas/phpdotenv": "~1.0",
-        "guzzlehttp/guzzle": "^6.1",
+        "guzzlehttp/guzzle": "^6.2.1",
         "doctrine/dbal": "2.5.1",
         "vluzrmos/collective-html": "^1.0"
     },

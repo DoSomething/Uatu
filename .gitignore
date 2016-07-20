@@ -1,5 +1,4 @@
 composer.phar
-composer.lock
 .env
 .DS_Store
 .sass-cache
